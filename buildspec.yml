@@ -4,7 +4,7 @@ phases:
   install:
     on-failure: ABORT
     commands:
-      - sudo apt update
+      - sudo apt update -y
       - curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
       - sh /tmp/nodesource_setup.sh
       - sudo apt install nodejs -y
