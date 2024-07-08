@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    commands:
+      - sudo apt update
+      - curl -sL https://deb.nodesource.com/setup_20.x -o /tmp/nodesource_setup.sh
+      - sh /tmp/nodesource_setup.sh
+      - sudo apt install nodejs -y
+      - node -v
+
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - npm ci
+
+  build:
+    on-failure: ABORT
+    commands:
+      - npm run build
+      - cp -r appspec.yml .htaccess build/
+
+artifacts:
+  files:
+    - "./*"
+  base-directory: build/
